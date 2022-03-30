@@ -1,0 +1,3 @@
+logo : kanit bold
+subtitle: ubuntu medium
+paragraph: roboto regular
