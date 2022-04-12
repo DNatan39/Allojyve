@@ -1,0 +1,298 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu:wght@500&display=swap');
+/* 
+font-family: 'Roboto', sans-serif;
+font-family: 'Ubuntu', sans-serif;
+ 
+*/
+
+*{
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box;
+}
+
+body{
+    background: #000;
+    overflow: hidden;
+}
+
+/* Background */
+
+#trianglenoir{
+    display : inline-block;
+    height : 0;
+    width : 0;
+    border-right : 150px solid transparent;
+    border-bottom : 150px solid red;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+#trianglejaune{
+    display : inline-block;
+    height : 0;
+    width : 0;
+    border-top : 150px solid red;
+    border-left : 150px solid transparent;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+/* Mobile */
+
+header{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 10vh;
+    text-transform: uppercase;
+    font-size: 15px;
+    box-shadow: 0 1px 16px rgba(0, 0, 0, .4);
+}
+
+#Nlogoprincipal{
+    margin: 0;
+    padding: 0;
+    width: 80%;
+    min-height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+#NLogo, nav, li{
+    display: inline-block;
+}
+
+
+#NLogo{
+    background: url(../img/logo/allojyvé.png) center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 80%;
+    height: 10vh;
+    position: absolute;
+}
+
+#Nburgercontent{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
+.Nliste{
+    display: inline-block;
+    line-height: 48px;
+    vertical-align: top;
+}
+
+.Nliste li a, .button{
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+}
+.Nliste a:hover{
+    color: #fbdd00;
+    transition: all 1s ease-out;
+}
+.button{
+    text-transform: uppercase;
+    float: right;
+    margin-top: -16px;
+    line-height: 84px;
+    height: 84px;
+    text-decoration: none;
+    padding: 0 16px;
+}
+.button-sign-up{
+    background-color: #eee;
+}
+
+.Nliste ul{
+    list-style-type: none;
+}
+#Nreseaux{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-left: 35px;
+}
+#Nreseaux .color{
+    color: #fbdd00;
+    margin: 10px;
+}
+#Nburger, #Nburgercontent{
+    display: inline;
+}
+#Nburgerbutton{
+    display: none;
+    color: #fff;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 30px;
+    padding: 0;
+    margin: 10px;
+    vertical-align: top;
+    line-height: 47px;
+    float: right;
+    margin-right: 15px;
+}
+#Nburgeroverlay{
+    display: none;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .4);
+}
+#Nburgersidebar{
+    display: none;
+    position: fixed;
+    width: 81%;
+    z-index: 20;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: #000000;
+    transform: translateX(-100%);
+    transition: transform .2s ease-out;
+}
+#Nburgersidebarbody span{
+    margin: 10%;
+    padding: 0 0 0 150%;
+    border-bottom: 4px solid #c9c9c9;
+}
+#Nburgersidebar li{
+    display: block;
+}
+#Nburgersidebarheader{
+    background: url(../img/logo/allojyvé.png) center;
+    background-repeat: no-repeat;
+    height: 128px;
+}
+#Nburgersidebarbody{
+    padding: 16px 8px;
+}
+#Nburgersidebarbody li:before{
+    content: ' ';
+    display: inline-block;
+    vertical-align: middle;
+    width: 24px;
+    height: 24px;
+    margin-right: 16px;
+    margin-bottom: 4px;
+}
+
+
+/* Section */
+
+#NBarrefix{
+    display: none;
+}
+
+
+@media screen and (max-width: 1024px){
+    #Nburgercontent{
+        display: none;
+    }
+    #Nburgerbutton, #Nburgersidebar,
+    .Nburger-activated #Nburgeroverlay{
+        display: block;
+    }
+    .Nburger-activated #Nburgersidebar{
+        transform: translateX(0);
+    }
+}
+
+
+/* Tablette */
+
+@media screen and (min-width: 600px){
+    #Nlogoprincipal {
+        margin-left: 5%;
+        min-width: 50%;
+        min-height: 10vh;
+        display: flex;
+        justify-content: start;
+    }
+    #NLogo{
+        width: 40%;
+        height: 10vh;
+    }
+    #Nburgerbutton{
+        margin: 20px;
+        margin-right: 35px;
+    }
+}
+
+
+/* Ordinateur */
+
+@media screen and (min-width: 1025px){
+    #main{
+        width: 100%;
+        height: 100vh;
+    }
+    #Nlogoprincipal{
+        width: 50%;
+        min-height: 10vh;
+        display: flex;
+        justify-content: start;
+        margin-left: 0;
+    }
+    #NLogo{
+        margin: 5px 0 0 5px;
+        width: 50%;
+        height: 10vh;
+    }
+    .Nliste{
+        display: flex;
+        justify-content: end;
+    }
+    .Nliste ul{
+        margin-right: 50px;
+    }
+    .Nliste li{
+        margin: 15px;
+        padding-top: 10px;
+    }
+    .Nliste a:hover{
+        cursor: pointer;
+        color: #fbdd00;
+        transition: all 1s ease-out;
+    }
+    #NBarrefix{
+        width: 25%;
+        height: 80vh;
+        margin: 30px 0 0 5px;
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        flex-direction: column;
+    }
+    #NBarrediv{
+        width: 25%;
+        height: 80vh;
+        background: #ffffff10;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        border-radius: 10px;
+    }
+    #NBarrediv  p{
+        font-family: 'Ubuntu', sans-serif;
+        color: #fff;
+        margin-top: 10%;
+        text-align: center;
+    }
+    #NTitlediv3{
+        margin-bottom: 10%;
+    }
+
+}
