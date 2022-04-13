@@ -14,65 +14,63 @@
 
 var main = document.getElementById('main');
 
-// background
-
-// var trianglenoir = document.createElement('div');
-// trianglenoir.id="trianglenoir";
-// main.appendChild(trianglenoir);
-
-// var trianglejaune = document.createElement('div');
-// trianglejaune.id="trianglejaune";
-// main.appendChild(trianglejaune);
-
-
 // Pour le header.
 
-function createElement(el, classname, id, container, href){
+function createElement(el, classname, id, container, href) {
     var element = document.createElement(el);
-    element.id=id;
+    element.id = id;
     element.classList.add(classname);
     container.appendChild(element);
 
     if (href !== null) {
-        el.href="#";
+        el.href = "#";
     }
 }
+// Div main
+createElement('header', 'header', 'Nheader', document.getElementById('main'), null);
+// Header
+createElement('div', 'Nlogoprincipal', 'Nlogoprincipal', document.getElementById('Nheader'), null);
+createElement('a', 'NLogo', 'NLogo', document.getElementById('Nlogoprincipal'));
+createElement('div', 'NBurger', 'Nburger', document.getElementById('Nheader'), null);
+// div nav
+createElement('div', 'Nburgercontent', 'Nburgercontent', document.getElementById('Nburger'), null);
+createElement('nav', 'Nliste', 'Nliste', document.getElementById('Nburgercontent'), null);
+createElement('button', 'Nburgerbutton', 'Nburgerbutton', document.getElementById('Nheader'), null);
+Nburgerbutton.textContent = "\u2630";
+createElement('div', 'Nburgersidebar', 'Nburgersidebar', document.getElementById('Nheader'), null);
+createElement('div', 'Nburgersidebarheader', 'Nburgersidebarheader', document.getElementById('Nburgersidebar'), null);
+createElement('div', 'Nburgersidebarbody', 'Nburgersidebarbody', document.getElementById('Nburgersidebar'), null);
+createElement('div', 'Nburgeroverlay', 'Nburgeroverlay', document.getElementById('Nheader'), null);
+createElement('div', 'Nreseaux', 'Nreseaux', document.getElementById('Nburgersidebar'), null);
 
-createElement('header', 'header' , 'Nheader', document.getElementById('main'), null);
-createElement('div', 'Nlogoprincipal' , 'Nlogoprincipal', document.getElementById('Nheader'), null);
-createElement('a', 'NLogo' , 'NLogo', document.getElementById('Nlogoprincipal'), null);
+// Section
+// createElement('section', 'NBarrefix' , 'NBarrefix', document.getElementById('main'), null);
+// createElement('div', 'NBarrediv' , 'NBarrediv', document.getElementById('NBarrefix'), null);
+createElement('section', 'Nsection', 'Nsection', document.getElementById('main'));
+createElement('div', 'Ndiv', 'Npopulaires', document.getElementById('Nsection'));
+createElement('p', 'Npara1', 'Npara1', document.getElementById('Npopulaires'));
+Npara1.textContent = "Populaires";
+createElement('div', 'Ndiv', 'Ndernière', document.getElementById('Nsection'));
+createElement('p', 'Npara2', 'Npara2', document.getElementById('Ndernière'));
+Npara2.textContent = "Dernière sorties";
+createElement('div', 'Ndiv', 'Navenir', document.getElementById('Nsection'));
+createElement('p', 'Npara3', 'Npara3', document.getElementById('Navenir'));
+Npara3.textContent = "À Venir";
 
 
+// Footer
+createElement('footer', 'Nfoot', 'Nfoot', document.getElementById('main'));
+createElement('div', 'Ndivlogo', 'Ndivlogo', document.getElementById('Nfoot'));
 
+createElement('div', 'Ndivinfo', 'Ndivinfo', document.getElementById('Nfoot'));
+createElement('p', 'Nparainfo', 'Nparainfo', document.getElementById('Ndivinfo'));
+Nparainfo.textContent = "Contact | Qui sommes-nous | Publicité | CGU | Politique de cookies | Préférences cookies | Données personnelles | Mentions légales  | Les services Allojyvé | ©Allojyvé";
 
+createElement('div', 'Ndivréseaux', 'Ndivréseaux', document.getElementById('Nfoot'));
+createElement('p', 'Ntitleréseaux', 'Ntitleréseaux', document.getElementById('Ndivréseaux'));
+Ndivréseaux.textContent = "Suivez-nous"
+createElement('div', 'Nfootdivréseaux', 'Nfootdivréseaux', document.getElementById('Ndivréseaux'));
 
-// var header = document.createElement('header');
-// main.appendChild(header);
-
-// Le logo principal.
-
-// var Nlogoprincipal = document.createElement('div');
-// Nlogoprincipal.id="Nlogoprincipal";
-// Nheader.appendChild(Nlogoprincipal);
-
-var NLogo = document.createElement('a');
-NLogo.href="#";
-NLogo.id="NLogo";
-Nlogoprincipal.appendChild(NLogo);
-
-// Menu nav pour le header.
-
-var Nburger = document.createElement('div');
-Nburger.id="Nburger";
-Nheader.appendChild(Nburger);
-
-var Nburgercontent = document.createElement('div');
-Nburgercontent.id="Nburgercontent";
-Nburger.appendChild(Nburgercontent);
-
-var Nliste = document.createElement('nav');
-Nliste.classList="Nliste";
-Nburgercontent.appendChild(Nliste);
 
 // Liste à puce.
 
@@ -82,9 +80,9 @@ Nliste.appendChild(ul);
 var li = document.createElement('li');
 ul.appendChild(li);
 var a = document.createElement('a');
-a.href="#";
+a.href = "#";
 li.appendChild(a);
-a.textContent="Acceuil";
+a.textContent = "Acceuil";
 
 var span = document.createElement('span');
 ul.appendChild(span);
@@ -92,82 +90,59 @@ ul.appendChild(span);
 var li = document.createElement('li');
 ul.appendChild(li);
 var a = document.createElement('a');
-a.href="#";
+a.href = "#";
 li.appendChild(a);
-a.textContent="Populaires";
+a.textContent = "Populaires";
 
 var li = document.createElement('li');
 ul.appendChild(li);
 var a = document.createElement('a');
-a.href="#";
+a.href = "#";
 li.appendChild(a);
-a.textContent="Dernières Sorties";
+a.textContent = "Dernières Sorties";
 
 var li = document.createElement('li');
 ul.appendChild(li);
 var a = document.createElement('a');
-a.href="#";
+a.href = "#";
 li.appendChild(a);
-a.textContent="À Venir";
-
-var Nburgerbutton = document.createElement('button');
-Nheader.appendChild(Nburgerbutton);
-Nburgerbutton.id="Nburgerbutton";
-Nburgerbutton.textContent="\u2630";
-
-var Nburgersidebar = document.createElement('div');
-Nburgersidebar.id="Nburgersidebar";
-Nheader.appendChild(Nburgersidebar);
-
-var Nburgersidebarheader = document.createElement('div');
-Nburgersidebarheader.id="Nburgersidebarheader";
-Nburgersidebar.appendChild(Nburgersidebarheader);
-
-var Nburgersidebarbody = document.createElement('div');
-Nburgersidebarbody.id="Nburgersidebarbody";
-Nburgersidebar.appendChild(Nburgersidebarbody);
-
-var Nburgeroverlay = document.createElement('div');
-Nburgeroverlay.id="Nburgeroverlay";
-Nheader.appendChild(Nburgeroverlay);
-
-var Nreseaux = document.createElement('div');
-Nreseaux.id="Nreseaux";
-Nburgersidebar.appendChild(Nreseaux);
+a.textContent = "À Venir";
 
 // Les icons pour les réseaux sociaux.
 
 var icontwitter = document.createElement('a');
-icontwitter.classList="fa-brands fa-instagram color";
+icontwitter.classList = "fa-brands fa-instagram color";
 Nreseaux.appendChild(icontwitter);
 var icontwitter = document.createElement('a');
-icontwitter.classList="fa-brands fa-twitter color";
+icontwitter.classList = "fa-brands fa-twitter color";
 Nreseaux.appendChild(icontwitter);
 var icontwitter = document.createElement('a');
-icontwitter.classList="fa-brands fa-facebook-f color";
+icontwitter.classList = "fa-brands fa-facebook-f color";
 Nreseaux.appendChild(icontwitter);
 
-// les Sections 
+var icontwitter = document.createElement('a');
+icontwitter.classList = "fa-brands fa-instagram color";
+Nfootdivréseaux.appendChild(icontwitter);
+var icontwitter = document.createElement('a');
+icontwitter.classList = "fa-brands fa-twitter color";
+Nfootdivréseaux.appendChild(icontwitter);
+var icontwitter = document.createElement('a');
+icontwitter.classList = "fa-brands fa-facebook-f color";
+Nfootdivréseaux.appendChild(icontwitter);
 
-var NBarrefix = document.createElement('section');
-NBarrefix.id="NBarrefix";
-main.appendChild(NBarrefix);
+// les Sections
 
-var NBarrediv = document.createElement('div');
-NBarrediv.id="NBarrediv";
-NBarrefix.appendChild(NBarrediv);
+// var textContentTitle = ['Populaires', 'Dernières Sorties', 'À Venir']
+// for (let i = 0; i < textContentTitle.length; i++) {
+//     var section = document.createElement('p');
+//     section.id = "Npara" + (i + 1);
+//     Npopulaires.appendChild(section);
+//     section.textContent = textContentTitle[i];
+// }
 
-var textContentTitle = ['Populaires','Dernières Sorties', 'À Venir']
-for (let i = 0; i < textContentTitle.length; i++) {
-var NTitlediv1 = document.createElement('p');
-NTitlediv1.id="NTitlediv"+(i+1);
-NBarrediv.appendChild(NTitlediv1);
-NTitlediv1.textContent=textContentTitle[i];
-}
-
-var NSection1 = document.createElement('section')
-NSection1.id="NSection1";
-main.appendChild(NSection1)
+// var Nsection = document.createElement('section')
+// Nsection.id = "Nsection";
+// main.appendChild(Nsection)
 
 
 // Barre de navigation
@@ -181,19 +156,14 @@ var activatedClass = 'Nburger-activated'
 
 sidebarBody.innerHTML = content.innerHTML
 
-button.addEventListener('click', function(e){
+button.addEventListener('click', function (e) {
     e.preventDefault();
-    
+
     this.parentNode.classList.add(activatedClass);
 });
 
-overlay.addEventListener('click', function(e){
+overlay.addEventListener('click', function (e) {
     e.preventDefault();
-    
+
     this.parentNode.classList.remove(activatedClass);
 });
-
-
-
-
-

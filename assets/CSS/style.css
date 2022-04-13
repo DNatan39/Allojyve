@@ -14,36 +14,24 @@ font-family: 'Ubuntu', sans-serif;
 }
 
 body{
+    width: 100%;
+    height: 100vh;
     background: #000;
     overflow: hidden;
 }
 
-/* Background */
-
-#trianglenoir{
-    display : inline-block;
-    height : 0;
-    width : 0;
-    border-right : 150px solid transparent;
-    border-bottom : 150px solid red;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-}
-#trianglejaune{
-    display : inline-block;
-    height : 0;
-    width : 0;
-    border-top : 150px solid red;
-    border-left : 150px solid transparent;
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-
 /* Mobile */
 
+#main{
+    width: 100%;
+    height: 100vh;
+}
+#main p{
+    font-size: 14px;
+}
+
 header{
+    background: #000;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -95,8 +83,12 @@ header{
     font-family: 'Roboto', sans-serif;
 }
 .Nliste a:hover{
-    color: #fbdd00;
-    transition: all 1s ease-out;
+    color: #000;
+    background: #fbdd00;
+    filter: drop-shadow(0 0 20px #fbdd00) drop-shadow(0 0 60px #fbdd00);
+    animation: animate_line 1s ease-in-out infinite;
+    border-radius: 10px;
+    padding: 2px;
 }
 .button{
     text-transform: uppercase;
@@ -123,6 +115,10 @@ header{
 #Nreseaux .color{
     color: #fbdd00;
     margin: 10px;
+}
+#Nreseaux a:hover{
+    filter: drop-shadow(0 0 20px #fbdd00) drop-shadow(0 0 60px #fbdd00);
+    animation: animate_line 1s ease-in-out infinite;
 }
 #Nburger, #Nburgercontent{
     display: inline;
@@ -192,9 +188,12 @@ header{
 
 /* Section */
 
-#NBarrefix{
+/* .Nsection{
     display: none;
-}
+} */
+
+/* Footer */
+
 
 
 @media screen and (max-width: 1024px){
@@ -207,6 +206,47 @@ header{
     }
     .Nburger-activated #Nburgersidebar{
         transform: translateX(0);
+    }
+    #Nfoot{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column-reverse;
+        width: 100%;
+        height: 50vh;
+        color: #fff;
+        font-family: 'Roboto', sans-serif;
+    }
+    #divlogo{
+        display: none;
+    }
+    #Ndivinfo{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #Nparainfo{
+        width: 50%;
+        text-align: center;
+    }
+    #Ndivréseaux{
+        width: 100%;
+        margin: 5%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    #Nfootdivréseaux{
+        color: #fbdd00;
+        width: 100%;
+        margin: 5%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #Nfootdivréseaux a{
+        padding: 3%;
     }
 }
 
@@ -235,6 +275,11 @@ header{
 /* Ordinateur */
 
 @media screen and (min-width: 1025px){
+    body{
+        background: url(../img/Fond/Fond.png) center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
     #main{
         width: 100%;
         height: 100vh;
@@ -262,37 +307,83 @@ header{
         margin: 15px;
         padding-top: 10px;
     }
+    .Nliste a{
+        padding: 3px;
+    }
     .Nliste a:hover{
         cursor: pointer;
-        color: #fbdd00;
-        transition: all 1s ease-out;
+        color: #000;
+        background: #fbdd00;
+        filter: drop-shadow(0 0 20px #fbdd00) drop-shadow(0 0 60px #fbdd00);
+        animation: animate_line 1s ease-in-out infinite;
+        border-radius: 10px;
+        padding: 3px;
     }
-    #NBarrefix{
-        width: 25%;
+    #Nsection{
+        width: 10%;
         height: 80vh;
-        margin: 30px 0 0 5px;
-        display: flex;
-        justify-content: center;
-        align-items: baseline;
-        flex-direction: column;
-    }
-    #NBarrediv{
-        width: 25%;
-        height: 80vh;
-        background: #ffffff10;
         display: flex;
         justify-content: space-between;
         flex-direction: column;
-        border-radius: 10px;
-    }
-    #NBarrediv  p{
-        font-family: 'Ubuntu', sans-serif;
+        text-align: center;
         color: #fff;
-        margin-top: 10%;
+        font-family: 'Ubuntu', sans-serif;
+        font-weight: 500;
+    }
+    #Nfoot{
+        width: 100%;
+        background: #000;
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: 'Roboto', sans-serif;
+    }
+    #Ndivlogo{
+        margin-left: 20px;
+        width: 20%;
+        height: 10vh;
+        background: url(../img/logo/allojyvé.png) center;
+        background-repeat: no-repeat;
+        background-size: 50%;
+    }
+    #Ndivinfo{
+        width: 50%;
+        display: flex;
+        justify-content: center;
+    }
+    #Nparainfo{
         text-align: center;
     }
-    #NTitlediv3{
-        margin-bottom: 10%;
+    #Ntitleréseaux{
+        display: flex;
+        justify-content: center;
     }
-
+    #Ndivréseaux{
+        margin-right: 20px;
+        margin-top: 10px;
+    }
+    #Nfootdivréseaux{
+        width: 100%;
+        height: 5vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #Nfootdivréseaux a{
+       width: 100%;
+       height: 2vh;
+       color: #fbdd00;
+       display: flex;
+       justify-content: center;
+    }
+    #Nfootdivréseaux a:hover{
+        cursor: pointer;
+        color: #000;
+        background: #fbdd00;
+        filter: drop-shadow(0 0 20px #fbdd00) drop-shadow(0 0 60px #fbdd00);
+        animation: animate_line 1s ease-in-out infinite;
+        border-radius: 10px;
+        padding: 3px;
+    }
 }
