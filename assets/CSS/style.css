@@ -3,7 +3,6 @@
 /* 
 font-family: 'Roboto', sans-serif;
 font-family: 'Ubuntu', sans-serif;
- 
 */
 
 *{
@@ -14,10 +13,8 @@ font-family: 'Ubuntu', sans-serif;
 }
 
 body{
-    width: 100%;
-    height: 100vh;
     background: #000;
-    overflow: hidden;
+    overflow: auto;
 }
 
 /* Mobile */
@@ -112,11 +109,20 @@ header{
     align-items: center;
     margin-left: 35px;
 }
+#Nreseaux a{
+    font-size: 20px;
+}
 #Nreseaux .color{
     color: #fbdd00;
     margin: 10px;
+    padding: 5px;
 }
 #Nreseaux a:hover{
+    color: #000000;
+    background: #fbdd00;
+    padding: 5px;
+    border: 1px solid #fbdd00;
+    border-radius: 10px;
     filter: drop-shadow(0 0 20px #fbdd00) drop-shadow(0 0 60px #fbdd00);
     animation: animate_line 1s ease-in-out infinite;
 }
@@ -184,17 +190,25 @@ header{
     margin-right: 16px;
     margin-bottom: 4px;
 }
-
+#Ndivréseaux .color{
+    margin: 10px;
+}
+#Ndivréseaux a:hover{
+    color: #000000;
+    background: #fbdd00;
+    margin: 10px;
+    border-radius: 10px;
+    filter: drop-shadow(0 0 20px #fbdd00) drop-shadow(0 0 60px #fbdd00);
+    animation: animate_line 1s ease-in-out infinite;
+}
 
 /* Section */
 
-/* .Nsection{
+.Nsection{
     display: none;
-} */
+}
 
-/* Footer */
-
-
+/* Header nav bar */
 
 @media screen and (max-width: 1024px){
     #Nburgercontent{
@@ -207,6 +221,9 @@ header{
     .Nburger-activated #Nburgersidebar{
         transform: translateX(0);
     }
+
+    /* Footer */
+
     #Nfoot{
         display: flex;
         justify-content: center;
@@ -246,16 +263,15 @@ header{
         align-items: center;
     }
     #Nfootdivréseaux a{
-        padding: 3%;
+        padding: 2%;
     }
 }
-
 
 /* Tablette */
 
 @media screen and (min-width: 600px){
     #Nlogoprincipal {
-        margin-left: 5%;
+        margin-left: 4%;
         min-width: 50%;
         min-height: 10vh;
         display: flex;
@@ -269,8 +285,10 @@ header{
         margin: 20px;
         margin-right: 35px;
     }
+    #Nfootdivréseaux a{
+        font-size: 20px;
+    }
 }
-
 
 /* Ordinateur */
 
@@ -295,6 +313,7 @@ header{
         margin: 5px 0 0 5px;
         width: 50%;
         height: 10vh;
+        background-size: 50%;
     }
     .Nliste{
         display: flex;
@@ -319,17 +338,6 @@ header{
         border-radius: 10px;
         padding: 3px;
     }
-    #Nsection{
-        width: 10%;
-        height: 80vh;
-        display: flex;
-        justify-content: space-between;
-        flex-direction: column;
-        text-align: center;
-        color: #fff;
-        font-family: 'Ubuntu', sans-serif;
-        font-weight: 500;
-    }
     #Nfoot{
         width: 100%;
         background: #000;
@@ -348,7 +356,7 @@ header{
         background-size: 50%;
     }
     #Ndivinfo{
-        width: 50%;
+        width: 40%;
         display: flex;
         justify-content: center;
     }
@@ -372,10 +380,12 @@ header{
     }
     #Nfootdivréseaux a{
        width: 100%;
-       height: 2vh;
+       height: 38px;
        color: #fbdd00;
        display: flex;
        justify-content: center;
+       padding: 3px;
+       font-size: 30px;
     }
     #Nfootdivréseaux a:hover{
         cursor: pointer;
@@ -385,5 +395,18 @@ header{
         animation: animate_line 1s ease-in-out infinite;
         border-radius: 10px;
         padding: 3px;
+    }
+    #Nsection{
+        width: 5%;
+        height: 80vh;
+        margin: 50px;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        text-align: center;
+        background: #00000050;
+        color: #fff;
+        font-family: 'Ubuntu', sans-serif;
+        font-weight: 500;
     }
 }

@@ -10,8 +10,6 @@
 // h1.textContent="Coucou";
 // main.appendChild(div1);
 
-
-
 var main = document.getElementById('main');
 
 // Pour le header.
@@ -26,13 +24,19 @@ function createElement(el, classname, id, container, href) {
         el.href = "#";
     }
 }
+
 // Div main
+
 createElement('header', 'header', 'Nheader', document.getElementById('main'), null);
+
 // Header
+
 createElement('div', 'Nlogoprincipal', 'Nlogoprincipal', document.getElementById('Nheader'), null);
 createElement('a', 'NLogo', 'NLogo', document.getElementById('Nlogoprincipal'));
 createElement('div', 'NBurger', 'Nburger', document.getElementById('Nheader'), null);
+
 // div nav
+
 createElement('div', 'Nburgercontent', 'Nburgercontent', document.getElementById('Nburger'), null);
 createElement('nav', 'Nliste', 'Nliste', document.getElementById('Nburgercontent'), null);
 createElement('button', 'Nburgerbutton', 'Nburgerbutton', document.getElementById('Nheader'), null);
@@ -44,8 +48,7 @@ createElement('div', 'Nburgeroverlay', 'Nburgeroverlay', document.getElementById
 createElement('div', 'Nreseaux', 'Nreseaux', document.getElementById('Nburgersidebar'), null);
 
 // Section
-// createElement('section', 'NBarrefix' , 'NBarrefix', document.getElementById('main'), null);
-// createElement('div', 'NBarrediv' , 'NBarrediv', document.getElementById('NBarrefix'), null);
+
 createElement('section', 'Nsection', 'Nsection', document.getElementById('main'));
 createElement('div', 'Ndiv', 'Npopulaires', document.getElementById('Nsection'));
 createElement('p', 'Npara1', 'Npara1', document.getElementById('Npopulaires'));
@@ -57,20 +60,19 @@ createElement('div', 'Ndiv', 'Navenir', document.getElementById('Nsection'));
 createElement('p', 'Npara3', 'Npara3', document.getElementById('Navenir'));
 Npara3.textContent = "À Venir";
 
-
 // Footer
+
 createElement('footer', 'Nfoot', 'Nfoot', document.getElementById('main'));
 createElement('div', 'Ndivlogo', 'Ndivlogo', document.getElementById('Nfoot'));
 
 createElement('div', 'Ndivinfo', 'Ndivinfo', document.getElementById('Nfoot'));
-createElement('p', 'Nparainfo', 'Nparainfo', document.getElementById('Ndivinfo'));
+createElement('a', 'Nparainfo', 'Nparainfo', document.getElementById('Ndivinfo'));
 Nparainfo.textContent = "Contact | Qui sommes-nous | Publicité | CGU | Politique de cookies | Préférences cookies | Données personnelles | Mentions légales  | Les services Allojyvé | ©Allojyvé";
 
 createElement('div', 'Ndivréseaux', 'Ndivréseaux', document.getElementById('Nfoot'));
 createElement('p', 'Ntitleréseaux', 'Ntitleréseaux', document.getElementById('Ndivréseaux'));
-Ndivréseaux.textContent = "Suivez-nous"
+Ntitleréseaux.textContent = "Suivez-nous"
 createElement('div', 'Nfootdivréseaux', 'Nfootdivréseaux', document.getElementById('Ndivréseaux'));
-
 
 // Liste à puce.
 
@@ -130,21 +132,6 @@ var icontwitter = document.createElement('a');
 icontwitter.classList = "fa-brands fa-facebook-f color";
 Nfootdivréseaux.appendChild(icontwitter);
 
-// les Sections
-
-// var textContentTitle = ['Populaires', 'Dernières Sorties', 'À Venir']
-// for (let i = 0; i < textContentTitle.length; i++) {
-//     var section = document.createElement('p');
-//     section.id = "Npara" + (i + 1);
-//     Npopulaires.appendChild(section);
-//     section.textContent = textContentTitle[i];
-// }
-
-// var Nsection = document.createElement('section')
-// Nsection.id = "Nsection";
-// main.appendChild(Nsection)
-
-
 // Barre de navigation
 
 var content = document.querySelector('#Nburgercontent');
@@ -167,3 +154,43 @@ overlay.addEventListener('click', function (e) {
 
     this.parentNode.classList.remove(activatedClass);
 });
+
+// Section + Div pour les films.
+
+function createSection(sectionName, sectionId, list, main){
+    var section = document.createElement('section');
+        section.id = sectionId;
+        section.classList.add('Nclass1', 'Nclass2');
+
+    main.appendChild(section);
+
+    var sectionTitle = document.createElement('h2');
+        sectionTitle.innerHTML = sectionName;
+        section.classList.add('Nclass');
+
+    section.appendChild(sectionTitle);
+
+    list.forEach(movie => {
+        var card = document.createElement('div');
+            card.id = movie.id;
+            
+        var cardImg = document.createElement('img');
+            cardImg.src = movie.img;
+            cardImg.classList.add('Ntaclass');
+
+        var cardTitle = document.createElement('h3');
+            cardTitle.innerHTML = movie.title;
+
+        card.appendChild(cardImg);
+        card.appendChild(cardTitle);
+
+        card.addEventListener('click', function(){
+            alert('film avec id '+this.id+' clicked');
+        })
+
+        section.appendChild(card);
+    });
+
+}
+
+createSection('populaires', 'popular', data, main);
