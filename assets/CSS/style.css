@@ -167,7 +167,7 @@ header{
     transition: transform .2s ease-out;
 }
 #Nburgersidebarbody span{
-    margin-left: 5%;
+    margin-left: 4%;
     padding: 0 0 0 150%;
     border-bottom: 4px solid #c9c9c9;
 }
@@ -320,9 +320,11 @@ header{
     }
     #Npopulaires, #Ndernière, #Navenir{
         display: flex;
+        justify-content: center;
         width: 100%;
     }
     #popular, #latest, #upcoming{
+        width: 60%;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
@@ -439,8 +441,20 @@ header{
         justify-content: center;
         align-items: center;
         z-index: 100000000000000;
-        min-width: 100px;
+        min-width: 150px;
         background: #0000002b;
+    }
+    #Npopulaires > p{
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 20px;
+    }
+    #Ndernière > p{
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 20px;
+    }
+    #Navenir > p{
+        font-family: 'Ubuntu', sans-serif;
+        font-size: 20px;
     }
     #Nsection{
         min-height: 80vh;
