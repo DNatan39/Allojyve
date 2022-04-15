@@ -203,12 +203,6 @@ header{
     transition: 0.75s all ease;
 }
 
-/* Section */
-
-.Nsection{
-    display: none;
-}
-
 /* Header nav bar */
 
 @media screen and (max-width: 1024px){

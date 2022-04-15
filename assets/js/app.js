@@ -1,14 +1,4 @@
-// var main = document.getElementById('main');
-// var div1 = document.createElement('div');
-// var h1 = document.createElement('h1');
 
-// div1.id="Truc";
-
-// div1.appendChild(h1);
-
-
-// h1.textContent="Coucou";
-// main.appendChild(div1);
 
 // Div main
 
@@ -28,10 +18,6 @@ function createElement(el, classname, id, container, href) {
         el.href = "#";
     }
 }
-
-// Image de fond.
-
-// createElement('img', 'Nimg', 'Nimg', document.getElementById('body'), null);
 
 // Pour le header.
 
@@ -165,30 +151,30 @@ overlay.addEventListener('click', function (e) {
 
 // Section + Div pour les films.
 
-function createSection(sectionName, sectionId, list, main){
+function createSection(sectionName, sectionId, list, main) {
     var section = document.createElement('section');
-        section.id = sectionId;
-        section.classList.add('Nclass1', 'Nclass2');
+    section.id = sectionId;
+    section.classList.add('Nclass1', 'Nclass2');
 
     main.appendChild(section);
 
     list.forEach(movie => {
         var card = document.createElement('div');
-            card.id = movie.id;
-            card.classList.add('Ncardclass')
-            card.setAttribute('list', sectionId);
-            
+        card.id = movie.id;
+        card.classList.add('Ncardclass')
+        card.setAttribute('list', sectionId);
+
         var cardImg = document.createElement('img');
-            cardImg.src =  'https://image.tmdb.org/t/p/original' + movie.poster_path;
-            cardImg.classList.add('Ntaclass');
+        cardImg.src = 'https://image.tmdb.org/t/p/original' + movie.poster_path;
+        cardImg.classList.add('Ntaclass');
 
         var cardTitle = document.createElement('h3');
-            cardTitle.innerHTML = movie.title;
+        cardTitle.innerHTML = movie.title;
 
         card.appendChild(cardImg);
         card.appendChild(cardTitle);
 
-        card.addEventListener('click', function(){
+        card.addEventListener('click', function () {
             var array;
             var listName = this.getAttribute('list');
             if (listName === "popular") {
@@ -214,45 +200,45 @@ function createSection(sectionName, sectionId, list, main){
 
 }
 
-function createModal(movie){
+function createModal(movie) {
     console.log(movie);
 }
 
 var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://api.themoviedb.org/3/movie/popular?api_key=6c904723a32a3fd1ccc74a46870a083b&language=en-US&page=1');
-    xhr.onload = () => {
-        if(xhr.status === 200){
-            // On stock la list de film récupérer dans la variable res en la convertissant de json à object js puis on parcour le tableau pour se rendre dans results
-            var res = JSON.parse(xhr.response).results;
-            popularList = res;
-            console.log(res);
-            createSection('Populaires', 'popular', res, document.getElementById('Npopulaires'));
-        }
+xhr.open('GET', 'https://api.themoviedb.org/3/movie/popular?api_key=6c904723a32a3fd1ccc74a46870a083b&language=en-US&page=1');
+xhr.onload = () => {
+    if (xhr.status === 200) {
+        // On stock la list de film récupérer dans la variable res en la convertissant de json à object js puis on parcour le tableau pour se rendre dans results
+        var res = JSON.parse(xhr.response).results;
+        popularList = res;
+        console.log(res);
+        createSection('Populaires', 'popular', res, document.getElementById('Npopulaires'));
     }
-    xhr.send()
+}
+xhr.send()
 
 var xhr3 = new XMLHttpRequest();
-    xhr3.open('GET', 'https://api.themoviedb.org/3/movie/top_rated?api_key=6c904723a32a3fd1ccc74a46870a083b&language=en-US&page=1');
-    xhr3.onload = () => {
-            if(xhr3.status === 200){
-                    // On stock la list de film récupérer dans la variable res en la convertissant de json à object js puis on parcour le tableau pour se rendre dans results
-                    var res = JSON.parse(xhr3.response).results;
-                    latestList = res;
-                    console.log(res);
-                    createSection('Dernières sorties', 'latest', res, document.getElementById('Ndernière'));
-            }
+xhr3.open('GET', 'https://api.themoviedb.org/3/movie/top_rated?api_key=6c904723a32a3fd1ccc74a46870a083b&language=en-US&page=1');
+xhr3.onload = () => {
+    if (xhr3.status === 200) {
+        // On stock la list de film récupérer dans la variable res en la convertissant de json à object js puis on parcour le tableau pour se rendre dans results
+        var res = JSON.parse(xhr3.response).results;
+        latestList = res;
+        console.log(res);
+        createSection('Dernières sorties', 'latest', res, document.getElementById('Ndernière'));
     }
-    xhr3.send()
+}
+xhr3.send()
 
 var xhr2 = new XMLHttpRequest();
-    xhr2.open('GET', 'https://api.themoviedb.org/3/movie/upcoming?api_key=6c904723a32a3fd1ccc74a46870a083b&language=en-US&page=1');
-    xhr2.onload = () => {
-            if(xhr2.status === 200){
-                // On stock la list de film récupérer dans la variable res en la convertissant de json à object js puis on parcour le tableau pour se rendre dans results
-                var res = JSON.parse(xhr2.response).results;
-                upcomingList = res;
-                console.log(res);
-                createSection('À venir', 'upcoming', res, document.getElementById('Navenir'));
-            }
-        }
-    xhr2.send()
+xhr2.open('GET', 'https://api.themoviedb.org/3/movie/upcoming?api_key=6c904723a32a3fd1ccc74a46870a083b&language=en-US&page=1');
+xhr2.onload = () => {
+    if (xhr2.status === 200) {
+        // On stock la list de film récupérer dans la variable res en la convertissant de json à object js puis on parcour le tableau pour se rendre dans results
+        var res = JSON.parse(xhr2.response).results;
+        upcomingList = res;
+        console.log(res);
+        createSection('À venir', 'upcoming', res, document.getElementById('Navenir'));
+    }
+}
+xhr2.send()
