@@ -58,6 +58,7 @@ createElement('div', 'Nreseaux', 'Nreseaux', document.getElementById('Nburgersid
 // Section
 
 createElement('section', 'Nsection', 'Nsection', document.getElementById('main'));
+createElement('div', 'NsectionAfter', 'NsectionAfter', document.getElementById('Nsection'));
 createElement('div', 'Ndiv', 'Npopulaires', document.getElementById('Nsection'));
 createElement('p', 'Npara1', 'Npara1', document.getElementById('Npopulaires'));
 Npara1.textContent = "Populaires";
@@ -216,6 +217,31 @@ function createSection(sectionName, sectionId, list, main){
 
 function createModal(movie){
     console.log(movie);
+    createElement('div', 'modal', 'modal', document.getElementById('Nsection'));
+    var close = document.createElement('i');
+        close.classList.add('fa-xmark', 'fa-solid', 'close');
+        close.addEventListener('click', function(){
+            this.parentNode.remove();
+        })
+    document.getElementById('modal').appendChild(close);
+
+
+    var poster = document.createElement('img');
+        poster.src = 'https://image.tmdb.org/t/p/original' + movie.poster_path
+
+    var modalContent = document.createElement('div');
+        modalContent.id = 'modalContent';
+    
+    document.getElementById('modal').appendChild(poster);
+    document.getElementById('modal').appendChild(modalContent);
+
+    var modalTitle = document.createElement('h2');
+        modalTitle.innerHTML = movie.title;
+    
+    document.getElementById('modalContent').appendChild(modalTitle);
+
+
+    
 }
 
 var xhr = new XMLHttpRequest();

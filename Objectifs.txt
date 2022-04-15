@@ -1,5 +1,5 @@
 - Header : OK
 - Footer : OK
-- API : EN COURS
+- API : OK
 - Fonctionnalité Alerte : NON
 
