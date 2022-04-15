@@ -215,8 +215,22 @@ function createSection(sectionName, sectionId, list, main){
 
 }
 
+function getMovieInfos(id){
+    return new Promise((resolve, reject) => {
+        
+        var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'https://api.themoviedb.org/3/movie/'+id+'?api_key=6c904723a32a3fd1ccc74a46870a083b&language=fr-FR');
+            xhr.onload = () => {
+                var res = JSON.parse(xhr.response);
+                resolve(res);
+            }
+            xhr.send();   
+        
+    })
+}
+
 function createModal(movie){
-    console.log(movie);
+
     createElement('div', 'modal', 'modal', document.getElementById('Nsection'));
     var close = document.createElement('i');
         close.classList.add('fa-xmark', 'fa-solid', 'close');
@@ -240,12 +254,74 @@ function createModal(movie){
     
     document.getElementById('modalContent').appendChild(modalTitle);
 
+    var releaseDate = displayFrenchFullDate(movie.release_date);
 
+    var releaseParagraph = document.createElement('p');
+    var spanReleaseParagraph = document.createElement('span');
+        spanReleaseParagraph.innerHTML = "Date de sortie : ";
+    releaseParagraph.appendChild(spanReleaseParagraph);
+    releaseParagraph.innerHTML += releaseDate;
+
+    modalContent.appendChild(releaseParagraph);
+
+    getMovieInfos(movie.id).then(res => {
+      
+        var productor = document.createElement('p');
+        var spanproductor = document.createElement('span');
+        spanproductor.innerHTML = "Société de production : ";
+        productor.appendChild(spanproductor);
+        productor.innerHTML += res.production_companies[0].name;
+
+        modalContent.appendChild(productor);
+
+        var originaltitle = document.createElement('p');
+        var spanoriginaltitle = document.createElement('span');
+        spanoriginaltitle.innerHTML = "Titre original : ";
+        originaltitle.appendChild(spanoriginaltitle);
+        originaltitle.innerHTML += res.original_title;
+
+        modalContent.appendChild(originaltitle);
+
+        var productorCountry = document.createElement('p');
+        var spanproductorCountry = document.createElement('span');
+        spanproductorCountry.innerHTML = "Pays de production : ";
+        productorCountry.appendChild(spanproductorCountry);
+        productorCountry.innerHTML += res.production_countries[0].name;
+
+        modalContent.appendChild(productorCountry);
+
+        var overview = document.createElement('p');
+            overview.classList.add('modalOverview');
+            overview.innerHTML += res.overview;
+
+        modalContent.appendChild(overview);
+
+
+    });
     
 }
 
+function checkNewRelease(list, listName){
+
+    var arrayId = [];
+    list.forEach(element => {
+        arrayId.push(element.id);
+    });
+
+    if (!localStorage.getItem(listName)) {
+        localStorage.setItem(listName, JSON.stringify(arrayId));
+        return;
+    }
+
+    var lastArrayId = JSON.parse(localStorage.getItem(listName));
+    localStorage.setItem(listName, JSON.stringify(arrayId));
+    console.log(lastArrayId)
+
+    // check difference between arrayId and lastArrayId
+}
+
 var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://api.themoviedb.org/3/movie/popular?api_key=6c904723a32a3fd1ccc74a46870a083b&language=en-US&page=1');
+    xhr.open('GET', 'https://api.themoviedb.org/3/movie/popular?api_key=6c904723a32a3fd1ccc74a46870a083b&language=fr-FR&page=1');
     xhr.onload = () => {
         if(xhr.status === 200){
             // On stock la list de film récupérer dans la variable res en la convertissant de json à object js puis on parcour le tableau pour se rendre dans results
@@ -253,12 +329,13 @@ var xhr = new XMLHttpRequest();
             popularList = res;
             console.log(res);
             createSection('Populaires', 'popular', res, document.getElementById('Npopulaires'));
+            checkNewRelease(res, 'popular');
         }
     }
     xhr.send()
 
 var xhr3 = new XMLHttpRequest();
-    xhr3.open('GET', 'https://api.themoviedb.org/3/movie/top_rated?api_key=6c904723a32a3fd1ccc74a46870a083b&language=en-US&page=1');
+    xhr3.open('GET', 'https://api.themoviedb.org/3/movie/top_rated?api_key=6c904723a32a3fd1ccc74a46870a083b&language=fr-FR&page=1');
     xhr3.onload = () => {
             if(xhr3.status === 200){
                     // On stock la list de film récupérer dans la variable res en la convertissant de json à object js puis on parcour le tableau pour se rendre dans results
@@ -271,7 +348,7 @@ var xhr3 = new XMLHttpRequest();
     xhr3.send()
 
 var xhr2 = new XMLHttpRequest();
-    xhr2.open('GET', 'https://api.themoviedb.org/3/movie/upcoming?api_key=6c904723a32a3fd1ccc74a46870a083b&language=en-US&page=1');
+    xhr2.open('GET', 'https://api.themoviedb.org/3/movie/upcoming?api_key=6c904723a32a3fd1ccc74a46870a083b&language=fr-FR&page=1');
     xhr2.onload = () => {
             if(xhr2.status === 200){
                 // On stock la list de film récupérer dans la variable res en la convertissant de json à object js puis on parcour le tableau pour se rendre dans results
@@ -282,3 +359,50 @@ var xhr2 = new XMLHttpRequest();
             }
         }
     xhr2.send()
+
+
+
+
+function displayFrenchFullDate(date) {
+    var newDate = new Date(date);
+
+    var month = newDate.getMonth();
+
+    var monthString;
+
+    if (month === 0) {
+        monthString = "Janvier";
+    } else if (month === 1) {
+        monthString = "Février";
+    } else if (month === 2) {
+        monthString = "Mars";
+    } else if (month === 3) {
+        monthString = "Avril";
+    } else if (month === 4) {
+        monthString = "Mai";
+    } else if (month === 5) {
+        monthString = "Juin";
+    } else if (month === 6) {
+        monthString = "Juillet";
+    } else if (month === 7) {
+        monthString = "Août";
+    } else if (month === 8) {
+        monthString = "Septembre";
+    } else if (month === 9) {
+        monthString = "Octobre";
+    } else if (month === 10) {
+        monthString = "Novembre";
+    } else if (month === 11) {
+        monthString = "Décembre";
+    }
+
+    var day = newDate.getDate();
+    if (day < 10) {
+        day = "0" + day.toString();
+    }
+
+    var years = newDate.getFullYear().toString();
+
+    return day + ' ' + monthString + ' ' + years;
+}
+
