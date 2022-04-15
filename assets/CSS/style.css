@@ -315,6 +315,23 @@ header{
         height: 10vh;
         background-size: 50%;
     }
+    #Npopulaires{
+        display: flex;
+        width: 100%;
+    }
+    #popular{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .Ncardclass{
+        width: 200px;
+        height: 400px;
+        margin: 10px;
+        cursor: pointer;
+    }
+    .Ntaclass{
+        width: 100%;
+    }
     .Nliste{
         display: flex;
         justify-content: end;
@@ -397,8 +414,7 @@ header{
         padding: 3px;
     }
     #Nsection{
-        width: 5%;
-        height: 80vh;
+        min-height: 80vh;
         margin: 50px;
         display: flex;
         justify-content: space-between;
