@@ -25,6 +25,7 @@ body{
 }
 #main p{
     font-size: 14px;
+    font-family: 'Roboto', sans-serif;
 }
 
 header{
@@ -78,14 +79,15 @@ header{
     color: #fff;
     text-decoration: none;
     font-family: 'Roboto', sans-serif;
+    padding: 10px;
 }
 .Nliste a:hover{
     color: #000;
     background: #fbdd00;
     filter: drop-shadow(0 0 20px #fbdd00) drop-shadow(0 0 60px #fbdd00);
-    animation: animate_line 1s ease-in-out infinite;
+    transition: 0.75s all ease;
     border-radius: 10px;
-    padding: 2px;
+    padding: 10px;
 }
 .button{
     text-transform: uppercase;
@@ -121,10 +123,9 @@ header{
     color: #000000;
     background: #fbdd00;
     padding: 5px;
-    border: 1px solid #fbdd00;
     border-radius: 10px;
     filter: drop-shadow(0 0 20px #fbdd00) drop-shadow(0 0 60px #fbdd00);
-    animation: animate_line 1s ease-in-out infinite;
+    transition: 0.75s all ease;
 }
 #Nburger, #Nburgercontent{
     display: inline;
@@ -166,7 +167,7 @@ header{
     transition: transform .2s ease-out;
 }
 #Nburgersidebarbody span{
-    margin: 10%;
+    margin-left: 5%;
     padding: 0 0 0 150%;
     border-bottom: 4px solid #c9c9c9;
 }
@@ -199,7 +200,7 @@ header{
     margin: 10px;
     border-radius: 10px;
     filter: drop-shadow(0 0 20px #fbdd00) drop-shadow(0 0 60px #fbdd00);
-    animation: animate_line 1s ease-in-out infinite;
+    transition: 0.75s all ease;
 }
 
 /* Section */
@@ -344,16 +345,16 @@ header{
         padding-top: 10px;
     }
     .Nliste a{
-        padding: 3px;
+        padding: 10px;
     }
     .Nliste a:hover{
         cursor: pointer;
         color: #000;
         background: #fbdd00;
         filter: drop-shadow(0 0 20px #fbdd00) drop-shadow(0 0 60px #fbdd00);
-        animation: animate_line 1s ease-in-out infinite;
+        transition: 0.75s all ease;
         border-radius: 10px;
-        padding: 3px;
+        padding: 10px;
     }
     #Nfoot{
         width: 100%;
@@ -383,6 +384,7 @@ header{
     #Ntitleréseaux{
         display: flex;
         justify-content: center;
+        margin: 10px;
     }
     #Ndivréseaux{
         margin-right: 20px;
@@ -397,21 +399,21 @@ header{
     }
     #Nfootdivréseaux a{
        width: 100%;
-       height: 38px;
+       height: 40px;
        color: #fbdd00;
        display: flex;
        justify-content: center;
-       padding: 3px;
-       font-size: 30px;
+       padding: 10px;
+       font-size: 25px;
     }
     #Nfootdivréseaux a:hover{
         cursor: pointer;
         color: #000;
         background: #fbdd00;
         filter: drop-shadow(0 0 20px #fbdd00) drop-shadow(0 0 60px #fbdd00);
-        animation: animate_line 1s ease-in-out infinite;
+        transition: 0.75s all ease;
         border-radius: 10px;
-        padding: 3px;
+        padding: 10px;
     }
     #Nsection{
         min-height: 80vh;
