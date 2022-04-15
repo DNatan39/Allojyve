@@ -93,7 +93,7 @@ ul.appendChild(li);
 var a = document.createElement('a');
 a.href = "#";
 li.appendChild(a);
-a.textContent = "Acceuil";
+a.textContent = "Accueil";
 
 var span = document.createElement('span');
 ul.appendChild(span);
@@ -301,21 +301,69 @@ function createModal(movie){
     
 }
 
+function createAlert(movies){
+
+    createElement('div', 'alert', 'alert', document.getElementById('Nsection'));
+    var close = document.createElement('i');
+        close.classList.add('fa-xmark', 'fa-solid', 'close');
+        close.addEventListener('click', function(){
+            this.parentNode.remove();
+        })
+    document.getElementById('alert').appendChild(close);
+    
+    var title = document.createElement('h3');
+        title.innerHTML = "New Releases";
+
+    document.getElementById('alert').appendChild(title);
+
+    var ul = document.createElement('ul');
+        ul.id = "alertUl";
+    document.getElementById('alert').appendChild(ul);
+
+    console.log(movies);
+    movies.forEach(movie => {
+        var li = document.createElement('li');
+            li.innerHTML = movie;
+
+        document.getElementById('alertUl').appendChild(li);
+    });
+    
+}
+
+Array.prototype.diff = function(a) {
+    return this.filter(function(i) {return a.indexOf(i) < 0;});
+};
+
 function checkNewRelease(list, listName){
 
-    var arrayId = [];
-    list.forEach(element => {
-        arrayId.push(element.id);
-    });
+    return new Promise((resolve, reject) => {
+        var arrayId = [];
+        list.forEach(element => {
+            arrayId.push(element.id);
+        });
 
-    if (!localStorage.getItem(listName)) {
+        if (!localStorage.getItem(listName)) {
+            localStorage.setItem(listName, JSON.stringify(arrayId));
+            return;
+        }
+
+        var lastArrayId = JSON.parse(localStorage.getItem(listName));
         localStorage.setItem(listName, JSON.stringify(arrayId));
-        return;
-    }
+        console.log(lastArrayId)
 
-    var lastArrayId = JSON.parse(localStorage.getItem(listName));
-    localStorage.setItem(listName, JSON.stringify(arrayId));
-    console.log(lastArrayId)
+        var newReleaseId = arrayId.diff(lastArrayId);
+        console.log(newReleaseId)
+        var newReleaseName = [];
+        newReleaseId.forEach(function (id, i) {
+            getMovieInfos(id).then(res => {
+                newReleaseName.push(res.title);
+                if (i + 1 === newReleaseId.length) {
+                    resolve(newReleaseName)
+                }
+            })
+        });
+
+    })
 
     // check difference between arrayId and lastArrayId
 }
@@ -328,8 +376,18 @@ var xhr = new XMLHttpRequest();
             var res = JSON.parse(xhr.response).results;
             popularList = res;
             console.log(res);
+            // res.forEach(element => {
+            //     if (element.id === 675353) {
+            //         element.id+=10
+            //     }
+            //     if (element.id === 508947) {
+            //         element.id+=3
+            //     }
+            // });
             createSection('Populaires', 'popular', res, document.getElementById('Npopulaires'));
-            checkNewRelease(res, 'popular');
+            checkNewRelease(res, 'popular').then(res => {
+                createAlert(res);
+            });
         }
     }
     xhr.send()
@@ -342,7 +400,9 @@ var xhr3 = new XMLHttpRequest();
                     var res = JSON.parse(xhr3.response).results;
                     latestList = res;
                     console.log(res);
+                
                     createSection('Dernières sorties', 'latest', res, document.getElementById('Ndernière'));
+                  
             }
     }
     xhr3.send()
@@ -356,6 +416,7 @@ var xhr2 = new XMLHttpRequest();
                 upcomingList = res;
                 console.log(res);
                 createSection('À venir', 'upcoming', res, document.getElementById('Navenir'));
+              
             }
         }
     xhr2.send()
