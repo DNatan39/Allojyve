@@ -1,15 +1,3 @@
-// var main = document.getElementById('main');
-// var div1 = document.createElement('div');
-// var h1 = document.createElement('h1');
-
-// div1.id="Truc";
-
-// div1.appendChild(h1);
-
-
-// h1.textContent="Coucou";
-// main.appendChild(div1);
-
 // Div main
 
 var main = document.getElementById('main');
@@ -28,10 +16,6 @@ function createElement(el, classname, id, container, href) {
         el.href = "#";
     }
 }
-
-// Image de fond.
-
-// createElement('img', 'Nimg', 'Nimg', document.getElementById('body'), null);
 
 // Pour le header.
 
@@ -82,6 +66,8 @@ createElement('div', 'Ndivréseaux', 'Ndivréseaux', document.getElementById('Nf
 createElement('p', 'Ntitleréseaux', 'Ntitleréseaux', document.getElementById('Ndivréseaux'));
 Ntitleréseaux.textContent = "Suivez-nous"
 createElement('div', 'Nfootdivréseaux', 'Nfootdivréseaux', document.getElementById('Ndivréseaux'));
+
+
 
 // Liste à puce.
 
@@ -149,7 +135,6 @@ var button = document.querySelector('#Nburgerbutton');
 var overlay = document.querySelector('#Nburgeroverlay');
 var activatedClass = 'Nburger-activated'
 
-
 sidebarBody.innerHTML = content.innerHTML
 
 button.addEventListener('click', function (e) {
@@ -166,30 +151,30 @@ overlay.addEventListener('click', function (e) {
 
 // Section + Div pour les films.
 
-function createSection(sectionName, sectionId, list, main){
+function createSection(sectionName, sectionId, list, main) {
     var section = document.createElement('section');
-        section.id = sectionId;
-        section.classList.add('Nclass1', 'Nclass2');
+    section.id = sectionId;
+    section.classList.add('Nclass1', 'Nclass2');
 
     main.appendChild(section);
 
     list.forEach(movie => {
         var card = document.createElement('div');
-            card.id = movie.id;
-            card.classList.add('Ncardclass')
-            card.setAttribute('list', sectionId);
-            
+        card.id = movie.id;
+        card.classList.add('Ncardclass')
+        card.setAttribute('list', sectionId);
+
         var cardImg = document.createElement('img');
-            cardImg.src =  'https://image.tmdb.org/t/p/original' + movie.poster_path;
-            cardImg.classList.add('Ntaclass');
+        cardImg.src = 'https://image.tmdb.org/t/p/original' + movie.poster_path;
+        cardImg.classList.add('Ntaclass');
 
         var cardTitle = document.createElement('h3');
-            cardTitle.innerHTML = movie.title;
+        cardTitle.innerHTML = movie.title;
 
         card.appendChild(cardImg);
         card.appendChild(cardTitle);
 
-        card.addEventListener('click', function(){
+        card.addEventListener('click', function () {
             var array;
             var listName = this.getAttribute('list');
             if (listName === "popular") {
@@ -215,57 +200,150 @@ function createSection(sectionName, sectionId, list, main){
 
 }
 
-function getMovieInfos(id){
-    return new Promise((resolve, reject) => {
-        
-        var xhr = new XMLHttpRequest();
-            xhr.open('GET', 'https://api.themoviedb.org/3/movie/'+id+'?api_key=6c904723a32a3fd1ccc74a46870a083b&language=fr-FR');
-            xhr.onload = () => {
-                var res = JSON.parse(xhr.response);
-                resolve(res);
+function createSlider(sectionName, sectionId, list, main){
+
+    var arrayList;
+
+    if (sectionId === "popular") {
+        arrayList = popularList;
+    }else if(sectionId === "latest"){
+        arrayList = latestList;
+    }else{
+        arrayList = upcomingList;
+    }
+
+    let position = 0;
+
+    main.classList.add('mobile');
+
+    var left = document.createElement('button');
+        left.classList.add('arrow', 'left-btn');
+        left.id = "left-btn-"+sectionId;
+        left.addEventListener('click', function(){
+            console.log(position); 
+            if (position > 0) {
+                position--;
+                img.src = 'https://image.tmdb.org/t/p/original' + arrayList[position].poster_path;
+                img.setAttribute('data-id', arrayList[position].id);
+            }else{
+                position = arrayList.length - 1;
+                img.src = 'https://image.tmdb.org/t/p/original' + arrayList[position].poster_path;
+                img.setAttribute('data-id', arrayList[position].id);
+            }  
+           
+        })
+
+    var leftIcon = document.createElement('i');
+        leftIcon.classList.add('arrow');
+        left.appendChild(leftIcon);
+
+    main.appendChild(left);
+
+
+    var img = document.createElement('img');
+        img.id = "carousel"+sectionId;
+        img.src = 'https://image.tmdb.org/t/p/original' + arrayList[0].poster_path
+        img.setAttribute('data-id', arrayList[0].id);
+        img.setAttribute('data-list', sectionId);
+        img.addEventListener('click', function () {
+            var array;
+            var listName = this.getAttribute('data-list');
+            if (listName === "popular") {
+                array = popularList;
             }
-            xhr.send();   
-        
+            if (listName === "upcoming") {
+                array = upcomingList;
+            }
+            if (listName === "latest") {
+                array = latestList;
+            }
+
+            array.forEach(film => {
+                if (parseInt(this.getAttribute('data-id')) === film.id) {
+                    createModal(film);
+                }
+            });
+
+        })
+
+    main.appendChild(img);
+
+    var right = document.createElement('button');
+        right.classList.add('arrow', 'right-btn');
+        right.id = "right-btn-"+sectionId;
+        right.addEventListener('click', function(){
+            console.log(position); 
+            if (position < 19) {
+                position++;
+                img.src = 'https://image.tmdb.org/t/p/original' + arrayList[position].poster_path;
+                img.setAttribute('data-id', arrayList[position].id);
+            }else{
+                position = 0;
+                img.src = 'https://image.tmdb.org/t/p/original' + arrayList[position].poster_path;
+                img.setAttribute('data-id', arrayList[position].id);
+            }
+        })
+    var rightIcon = document.createElement('i');
+        rightIcon.classList.add('arrow');
+        right.appendChild(rightIcon);
+
+    main.appendChild(right);
+
+
+
+}
+
+function getMovieInfos(id) {
+    return new Promise((resolve, reject) => {
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://api.themoviedb.org/3/movie/' + id + '?api_key=6c904723a32a3fd1ccc74a46870a083b&language=fr-FR');
+        xhr.onload = () => {
+            var res = JSON.parse(xhr.response);
+            resolve(res);
+        }
+        xhr.send();
+
     })
 }
 
-function createModal(movie){
+function createModal(movie) {
 
     createElement('div', 'modal', 'modal', document.getElementById('Nsection'));
     var close = document.createElement('i');
-        close.classList.add('fa-xmark', 'fa-solid', 'close');
-        close.addEventListener('click', function(){
-            this.parentNode.remove();
-        })
+    close.classList.add('fa-xmark', 'fa-solid', 'close');
+    close.addEventListener('click', function () {
+        this.parentNode.remove();
+    })
     document.getElementById('modal').appendChild(close);
 
 
     var poster = document.createElement('img');
-        poster.src = 'https://image.tmdb.org/t/p/original' + movie.poster_path
+    poster.src = 'https://image.tmdb.org/t/p/original' + movie.poster_path
 
     var modalContent = document.createElement('div');
-        modalContent.id = 'modalContent';
-    
+    modalContent.id = 'modalContent';
+
     document.getElementById('modal').appendChild(poster);
     document.getElementById('modal').appendChild(modalContent);
 
     var modalTitle = document.createElement('h2');
-        modalTitle.innerHTML = movie.title;
-    
+    modalTitle.innerHTML = movie.title;
+
     document.getElementById('modalContent').appendChild(modalTitle);
 
     var releaseDate = displayFrenchFullDate(movie.release_date);
 
     var releaseParagraph = document.createElement('p');
     var spanReleaseParagraph = document.createElement('span');
-        spanReleaseParagraph.innerHTML = "Date de sortie : ";
+    spanReleaseParagraph.innerHTML = "Date de sortie : ";
     releaseParagraph.appendChild(spanReleaseParagraph);
     releaseParagraph.innerHTML += releaseDate;
 
     modalContent.appendChild(releaseParagraph);
 
     getMovieInfos(movie.id).then(res => {
-      
+
         var productor = document.createElement('p');
         var spanproductor = document.createElement('span');
         spanproductor.innerHTML = "Société de production : ";
@@ -291,50 +369,52 @@ function createModal(movie){
         modalContent.appendChild(productorCountry);
 
         var overview = document.createElement('p');
-            overview.classList.add('modalOverview');
-            overview.innerHTML += res.overview;
+        overview.classList.add('modalOverview');
+        overview.innerHTML += res.overview;
 
         modalContent.appendChild(overview);
 
 
     });
-    
+
 }
 
-function createAlert(movies){
+function createAlert(movies) {
 
     createElement('div', 'alert', 'alert', document.getElementById('Nsection'));
     var close = document.createElement('i');
-        close.classList.add('fa-xmark', 'fa-solid', 'close');
-        close.addEventListener('click', function(){
-            this.parentNode.remove();
-        })
+    close.classList.add('fa-xmark', 'fa-solid', 'close');
+    close.addEventListener('click', function () {
+        this.parentNode.remove();
+    })
     document.getElementById('alert').appendChild(close);
-    
+
     var title = document.createElement('h3');
-        title.innerHTML = "New Releases";
+    title.innerHTML = "New Releases";
 
     document.getElementById('alert').appendChild(title);
 
     var ul = document.createElement('ul');
-        ul.id = "alertUl";
+    ul.id = "alertUl";
     document.getElementById('alert').appendChild(ul);
 
     console.log(movies);
     movies.forEach(movie => {
         var li = document.createElement('li');
-            li.innerHTML = movie;
+        li.innerHTML = movie;
 
         document.getElementById('alertUl').appendChild(li);
     });
-    
+
 }
 
-Array.prototype.diff = function(a) {
-    return this.filter(function(i) {return a.indexOf(i) < 0;});
+Array.prototype.diff = function (a) {
+    return this.filter(function (i) {
+        return a.indexOf(i) < 0;
+    });
 };
 
-function checkNewRelease(list, listName){
+function checkNewRelease(list, listName) {
 
     return new Promise((resolve, reject) => {
         var arrayId = [];
@@ -369,57 +449,78 @@ function checkNewRelease(list, listName){
 }
 
 var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://api.themoviedb.org/3/movie/popular?api_key=6c904723a32a3fd1ccc74a46870a083b&language=fr-FR&page=1');
-    xhr.onload = () => {
-        if(xhr.status === 200){
-            // On stock la list de film récupérer dans la variable res en la convertissant de json à object js puis on parcour le tableau pour se rendre dans results
-            var res = JSON.parse(xhr.response).results;
-            popularList = res;
-            console.log(res);
-            // res.forEach(element => {
-            //     if (element.id === 675353) {
-            //         element.id+=10
-            //     }
-            //     if (element.id === 508947) {
-            //         element.id+=3
-            //     }
-            // });
+xhr.open('GET', 'https://api.themoviedb.org/3/movie/popular?api_key=6c904723a32a3fd1ccc74a46870a083b&language=fr-FR&page=1');
+xhr.onload = () => {
+    if (xhr.status === 200) {
+        // On stock la liste de film récupérée dans la variable res en la convertissant de json à un object JS puis on parcour le tableau pour se rendre dans les résultats
+        var res = JSON.parse(xhr.response).results;
+        popularList = res;
+        console.log(res);
+        // res.forEach(element => {
+        //     if (element.id === 675353) {
+        //         element.id+=10
+        //     }
+        //     if (element.id === 508947) {
+        //         element.id+=3
+        //     }
+        // });
+        if (window.matchMedia("(max-width: 1024px)").matches) {
+            createSlider('Populaires', 'popular', res, document.getElementById('Npopulaires'))
+        } else{
             createSection('Populaires', 'popular', res, document.getElementById('Npopulaires'));
-            checkNewRelease(res, 'popular').then(res => {
-                createAlert(res);
-            });
-        }
+        }      
+       
+        checkNewRelease(res, 'popular').then(res => {
+            createAlert(res);
+        });
     }
-    xhr.send()
+}
+
+
+
+
+xhr.send()
 
 var xhr3 = new XMLHttpRequest();
-    xhr3.open('GET', 'https://api.themoviedb.org/3/movie/top_rated?api_key=6c904723a32a3fd1ccc74a46870a083b&language=fr-FR&page=1');
-    xhr3.onload = () => {
-            if(xhr3.status === 200){
-                    // On stock la list de film récupérer dans la variable res en la convertissant de json à object js puis on parcour le tableau pour se rendre dans results
-                    var res = JSON.parse(xhr3.response).results;
-                    latestList = res;
-                    console.log(res);
-                
-                    createSection('Dernières sorties', 'latest', res, document.getElementById('Ndernière'));
-                  
-            }
+xhr3.open('GET', 'https://api.themoviedb.org/3/movie/top_rated?api_key=6c904723a32a3fd1ccc74a46870a083b&language=fr-FR&page=1');
+xhr3.onload = () => {
+    if (xhr3.status === 200) {
+        // On stock la list de film récupérer dans la variable res en la convertissant de json à object js puis on parcour le tableau pour se rendre dans results
+        var res = JSON.parse(xhr3.response).results;
+        latestList = res;
+        console.log(res);
+
+        if (window.matchMedia("(max-width: 1024px)").matches) {
+            createSlider('Dernières sorties', 'latest', res, document.getElementById('Ndernière'))
+        }else{
+            createSection('Dernières sorties', 'latest', res, document.getElementById('Ndernière'));
+        }
+        
+
     }
-    xhr3.send()
+}
+
+xhr3.send()
 
 var xhr2 = new XMLHttpRequest();
-    xhr2.open('GET', 'https://api.themoviedb.org/3/movie/upcoming?api_key=6c904723a32a3fd1ccc74a46870a083b&language=fr-FR&page=1');
-    xhr2.onload = () => {
-            if(xhr2.status === 200){
-                // On stock la list de film récupérer dans la variable res en la convertissant de json à object js puis on parcour le tableau pour se rendre dans results
-                var res = JSON.parse(xhr2.response).results;
-                upcomingList = res;
-                console.log(res);
-                createSection('À venir', 'upcoming', res, document.getElementById('Navenir'));
-              
-            }
+xhr2.open('GET', 'https://api.themoviedb.org/3/movie/upcoming?api_key=6c904723a32a3fd1ccc74a46870a083b&language=fr-FR&page=1');
+xhr2.onload = () => {
+    if (xhr2.status === 200) {
+        // On stock la list de film récupérer dans la variable res en la convertissant de json à object js puis on parcour le tableau pour se rendre dans results
+        var res = JSON.parse(xhr2.response).results;
+        upcomingList = res;
+        console.log(res);
+
+        if (window.matchMedia("(max-width: 1024px)").matches) {
+            createSlider('À venir', 'upcoming', res, document.getElementById('Navenir'))
+        }else{
+            createSection('À venir', 'upcoming', res, document.getElementById('Navenir'));
         }
-    xhr2.send()
+        
+
+    }
+}
+xhr2.send()
 
 
 
@@ -467,3 +568,32 @@ function displayFrenchFullDate(date) {
     return day + ' ' + monthString + ' ' + years;
 }
 
+const img = document.getElementById('popular');
+const rightBtn = document.getElementById('right-btn');
+const leftBtn = document.getElementById('left-btn');
+
+// Images are from unsplash
+let position = 0;
+
+const moveRight = () => {
+    if (position >= pictures.length - 1) {
+        position = 0
+        img.src = pictures[position];
+        return;
+    }
+    img.src = pictures[position + 1];
+    position++;
+}
+
+const moveLeft = () => {
+    if (position < 1) {
+        position = pictures.length - 1;
+        img.src = pictures[position];
+        return;
+    }
+    img.src = pictures[position - 1];
+    position--;
+}
+
+rightBtn.addEventListener("click", moveRight);
+leftBtn.addEventListener("click", moveLeft);
