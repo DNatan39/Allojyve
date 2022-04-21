@@ -87,21 +87,21 @@ ul.appendChild(span);
 var li = document.createElement('li');
 ul.appendChild(li);
 var a = document.createElement('a');
-a.href = "#";
+a.href = "#Npopulaires";
 li.appendChild(a);
 a.textContent = "Populaires";
 
 var li = document.createElement('li');
 ul.appendChild(li);
 var a = document.createElement('a');
-a.href = "#";
+a.href = "#Ndernière";
 li.appendChild(a);
 a.textContent = "Dernières Sorties";
 
 var li = document.createElement('li');
 ul.appendChild(li);
 var a = document.createElement('a');
-a.href = "#";
+a.href = "#Navenir";
 li.appendChild(a);
 a.textContent = "À Venir";
 
@@ -471,7 +471,7 @@ xhr.onload = () => {
         }      
        
         checkNewRelease(res, 'popular').then(res => {
-            createAlert(res);
+        createAlert(res);
         });
     }
 }
